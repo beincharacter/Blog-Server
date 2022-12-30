@@ -12,7 +12,10 @@ router.post('/login' , async(req,res)=>{
         // console.log(Isuser)
 
         if(!Isuser){
-            return res.status(400).send("No User Exists With given Email")
+            return res.status(400).json({
+                status: 400,
+                message: "Wrong email"
+            })
         }else{
             bcrypt.compare(password , Isuser.password, function(err,result){
                 if(err){
@@ -32,7 +35,10 @@ router.post('/login' , async(req,res)=>{
                         "token":token
                     })
                 }else{
-                    return res.status(400).send("Invalid credentials")
+                    return res.status(400).json({
+                        status: 401,
+                        message: "Invalid credentials"
+                    })
                 }
             })
 
