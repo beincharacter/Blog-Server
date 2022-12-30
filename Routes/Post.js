@@ -5,7 +5,7 @@ const router = require('express').Router()
 
 router.get('/posts' , async(req,res)=>{
     try{
-        const posts = await Post.find({user: req.user}) 
+        const posts = await Post.find() 
         res.status(200).json(posts)
 
     }catch(e){
