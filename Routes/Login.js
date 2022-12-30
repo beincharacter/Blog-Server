@@ -9,6 +9,7 @@ router.post('/login' , async(req,res)=>{
     try{
         const {email , password} = req.body
         const Isuser = await User.findOne({email:email})
+        // console.log(Isuser)
 
         if(!Isuser){
             return res.status(400).send("No User Exists With given Email")
@@ -27,6 +28,7 @@ router.post('/login' , async(req,res)=>{
                     },secret);
                     return res.status(200).json({
                         "Message":"Logged In",
+                        "name": Isuser.name,
                         "token":token
                     })
                 }else{
